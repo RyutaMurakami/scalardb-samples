@@ -8,14 +8,14 @@ import sample.Sample;
 @Command(name = "GetCustomerInfo", description = "Get customer information")
 public class GetCustomerInfoCommand implements Callable<Integer> {
 
-  @Parameters(index = "0", paramLabel = "CUSTOMER_ID", description = "customer ID")
-  private int customerId;
+    @Parameters(index = "0", paramLabel = "CUSTOMER_ID", description = "customer ID")
+    private int customerId;
 
-  @Override
-  public Integer call() throws Exception {
-    try (Sample sample = new Sample()) {
-      System.out.println(sample.getCustomerInfo(customerId));
+    @Override
+    public Integer call() throws Exception {
+        try (Sample sample = new Sample()) {
+            System.out.println(sample.getCustomerInfo(customerId));
+        }
+        return 0;
     }
-    return 0;
-  }
 }

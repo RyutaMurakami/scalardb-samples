@@ -13,13 +13,9 @@ repositories {
 dependencies {
     implementation 'com.scalar-labs:scalardb:3.9.1'
     implementation 'info.picocli:picocli:4.7.1'
+     implementation 'org.slf4j:slf4j-log4j12:1.7.30'
 }
 
 application {
-    mainClassName = 'sample.command.SampleCommand'
+    mainClass.set('sample.command.SampleCommand')
 }
-
-archivesBaseName = "sample"
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8

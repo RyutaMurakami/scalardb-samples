@@ -7,11 +7,11 @@ import sample.Sample;
 @Command(name = "LoadInitialData", description = "Load initial data")
 public class LoadInitialDataCommand implements Callable<Integer> {
 
-  @Override
-  public Integer call() throws Exception {
-    try (Sample sample = new Sample()) {
-      sample.loadInitialData();
+    @Override
+    public Integer call() throws Exception {
+        try (Sample sample = new Sample()) {
+            sample.loadInitialData();
+        }
+        return 0;
     }
-    return 0;
-  }
 }

@@ -7,11 +7,11 @@
     "columns": {
       "customer_id": "INT",
       "name": "TEXT",
-      "credit_limit": "INT",
-      "credit_total": "INT"
+      "credit_number": "INT",
+      "customer_address": "INT"
     }
   },
-  "order.orders": {
+  "item.orders": {
     "transaction": true,
     "partition-key": [
       "customer_id"
@@ -28,7 +28,7 @@
       "timestamp": "BIGINT"
     }
   },
-  "order.statements": {
+  "item.statements": {
     "transaction": true,
     "partition-key": [
       "order_id"
@@ -42,7 +42,7 @@
       "count": "INT"
     }
   },
-  "order.items": {
+  "item.stocks": {
     "transaction": true,
     "partition-key": [
       "item_id"
@@ -50,7 +50,20 @@
     "columns": {
       "item_id": "INT",
       "name": "TEXT",
-      "price": "INT"
+      "price": "INT",
+      "shop_id": "INT",
+      "stock": "INT"
+    }
+  },
+  "item.shops": {
+    "transaction": true,
+    "partition-key": [
+      "shop_id"
+    ],
+    "columns": {
+      "shop_id": "INT",
+      "shop_name": "TEXT",
+      "shop_address": "INT"
     }
   }
 }
