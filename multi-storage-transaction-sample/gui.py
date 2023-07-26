@@ -7,18 +7,17 @@ import re
 
 initial_cmd = ["docker-compose up -d",
     "java -jar scalardb-schema-loader-3.9.1.jar --config database.properties --schema-file schema.json --coordinator",
-    "./gradlew run --args=\"LoadInitialData\"",
-    "./gradlew run --args=\"GetItemInfo WinPC\""]
+    "./gradlew run --args=\"LoadInitialData\""]
 
 def search_customer():
     input_text = entry_1.get()
     cmd = f"./gradlew run --args=\"GetCustomerInfo {input_text}\""
     res = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout
+    print(res)
 
     start = '{'
     end = '}'
     subres = res[res.index(start)+1:res.index(end)].strip()
-    print(subres)
     data = re.split(": |, ", subres)
 
     label_1b.config(text=f"ID: {data[1]}\nName: {data[3][1:-1]}\nCredit Number: {data[5]}\nAddress: {data[7]}")
@@ -27,6 +26,7 @@ def search_item():
     input_text = entry_2.get()
     cmd = f"./gradlew run --args=\"GetItemInfo {input_text}\""
     res = subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout
+    print(res)
 
     start = '['
     end = ']'
@@ -37,8 +37,6 @@ def search_item():
     for item in items:
         data.append(re.split(": |, |,", item))
     data.remove([''])
-
-    print(data)
     
     txt = ""
     for i in range(len(data)):
@@ -49,7 +47,9 @@ def exe_item_increase():
     input_text1 = entry_3a.get()
     input_text2 = entry_3b.get()
     cmd = f"./gradlew run --args=\"IncreaseItemStock {input_text1} {input_text2}\""
-    res = subprocess.run(cmd, shell=True, capture_output=True, text=True).stderr
+    res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    print(res.stdout)
+    res = res.strerr
 
     if "at" in res:
         label_3b.config(text="Error")
@@ -64,9 +64,7 @@ def exe_item_add():
     input_text5 = entry_3g.get()
     cmd = f"./gradlew run --args=\"AddItemCommand {input_text1} {input_text2} {input_text3} {input_text4} {input_text5}\""
     res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-
     print(res.stdout)
-    print(res.stderr)
 
     if "at" in res.stderr or "parameters" in res.stderr:
         label_3d.config(text="Error")
@@ -78,7 +76,7 @@ def exe_item_add():
 
 def main():
     subprocess.run(initial_cmd[0], shell=True)
-    time.sleep(15)
+    time.sleep(20)
     subprocess.run(initial_cmd[1], shell=True)
     subprocess.run(initial_cmd[2], shell=True)
 
