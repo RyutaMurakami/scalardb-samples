@@ -149,7 +149,7 @@ $ python gui.py
 ```
 
 This is because the Python program is executing the following three commands.
-**Note that scalardb-schema-loader-<VERSION>.jar is requied in this directory**
+**Note that scalardb-schema-loader-<VERSION>.jar is requied in this directory.**
 
 ```shell
 $ docker-compose up -d
